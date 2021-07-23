@@ -61,7 +61,7 @@ axios.interceptors.response.use(
   }
 );
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
+axios.defaults.baseURL = 'https://prueba-examen-pixzelle.herokuapp.com/api';
 axios.interceptors.request.use(function(config) {
   store.commit('loading', true);
   config.headers.common = {

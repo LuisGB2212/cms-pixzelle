@@ -20,10 +20,10 @@
                 <td>{{user.email}}</td>
                 <td>{{user.type_user}}</td>
                 <td>{{user.rol_id}}</td>
-                <td>{{user.user_video_games_count}}</td>
+                <td><span class="badge bg-success">{{user.user_video_games_count}}</span></td>
                 <td>{{user.created_at | dateFormat}}</td>
                 <td>{{user.updated_at | dateFormat}}</td>
-                <td>
+                <td width="15%">
                     <div v-if="user.deleted_at">
                         <button class="btn btn-dark m-1">
                             Activar

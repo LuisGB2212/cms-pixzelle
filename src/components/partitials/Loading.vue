@@ -1,232 +1,92 @@
 <template>
-    <div class="preloader">
-        <div class="preloader__wheel-wrapper">
-            <div class="preloader__wheel"><span class="preloader__content">l</span>
-            <div class="preloader__inner-wheel"></div>
-            <div class="preloader__second-inner-whell"></div>
-            </div>
-        </div>
-        <div class="preloader__wheel-wrapper">
-            <div class="preloader__wheel"><span class="preloader__content">o</span>
-            <div class="preloader__inner-wheel"></div>
-            <div class="preloader__second-inner-whell"></div>
-            </div>
-        </div>
-        <div class="preloader__wheel-wrapper">
-            <div class="preloader__wheel"><span class="preloader__content">a</span>
-            <div class="preloader__inner-wheel"></div>
-            <div class="preloader__second-inner-whell"></div>
-            </div>
-        </div>
-        <div class="preloader__wheel-wrapper">
-            <div class="preloader__wheel"><span class="preloader__content">d</span>
-            <div class="preloader__inner-wheel"></div>
-            <div class="preloader__second-inner-whell"></div>
-            </div>
-        </div>
-        <div class="preloader__wheel-wrapper">
-            <div class="preloader__wheel"><span class="preloader__content">i</span>
-            <div class="preloader__inner-wheel"></div>
-            <div class="preloader__second-inner-whell"></div>
-            </div>
-        </div>
-        <div class="preloader__wheel-wrapper">
-            <div class="preloader__wheel"><span class="preloader__content">n</span>
-            <div class="preloader__inner-wheel"></div>
-            <div class="preloader__second-inner-whell"></div>
-            </div>
-        </div>
-        <div class="preloader__wheel-wrapper">
-            <div class="preloader__wheel"><span class="preloader__content">g</span>
-            <div class="preloader__inner-wheel"></div>
-            <div class="preloader__second-inner-whell"></div>
-            </div>
-        </div>
-        </div>
+  <div v-if="isLoading" class="custom_loading">
+    <div class="sk-chase">
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+      <div class="sk-chase-dot"></div>
+    </div>
+  </div>
 </template>
+<script>
+import { mapState } from 'vuex';
+export default {
+    props:{
+        //showLoading:Boolean,
+    },
+    computed: {
+        ...mapState(['isLoading'])
+    },
+}
+</script>
 <style lang="css">
-    .preloader {
-  position: absolute;
-  left: 50%;
-  top: 10%;
-  transform: translate(-50%, -50%);
-}
-.preloader__content {
-  position: absolute;
-  color: #F4511E;
-  top: -20px;
-  font-size: 1.2em;
-  text-transform: uppercase;
-}
-.preloader__wheel {
-  width: 60px;
-  height: 60px;
-  background: #F4511E;
-  z-index: 2;
-}
-.preloader__wheel-wrapper {
-  position: absolute;
-  z-index: 1;
-}
-.preloader__wheel-wrapper:nth-child(2n) {
-  right: 10px;
-}
-.preloader__wheel-wrapper:nth-child(2n):before {
-  content: "";
-  top: -15px;
-  left: 2px;
-  position: absolute;
-  width: 110px;
-  height: 1px;
-  background-color: #DD2C00;
-  transform: rotate(-50.5deg);
-  z-index: 5;
-}
-.preloader__wheel-wrapper:nth-child(2n):after {
-  content: "";
-  position: absolute;
-  width: 110px;
-  height: 1px;
-  background-color: #DD2C00;
-  transform: rotate(-33.5deg);
-  z-index: 5;
-  left: 23px;
-  top: 10px;
-}
-.preloader__wheel-wrapper:nth-child(2n+1) {
-  left: 10px;
-}
-.preloader__wheel-wrapper:nth-child(2n+1):before {
-  content: "";
-  top: 9px;
-  left: -74px;
-  position: absolute;
-  width: 110px;
-  height: 1px;
-  background-color: #DD2C00;
-  transform: rotate(33deg);
-  z-index: 5;
-}
-.preloader__wheel-wrapper:nth-child(2n+1):after {
-  content: "";
-  position: absolute;
-  width: 110px;
-  height: 1px;
-  background-color: #DD2C00;
-  transform: rotate(49deg);
-  z-index: 5;
-  top: -17.5px;
-  left: -54px;
-}
-.preloader__wheel-wrapper:nth-child(1):after {
-  display: none;
-}
-.preloader__wheel-wrapper:nth-child(1):before {
-  display: none;
-}
-.preloader__inner-wheel, .preloader__second-inner-whell {
-  width: 20px;
-  height: 20px;
-  background-color: #DD2C00;
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  transform: rotate(45deg);
-  border-radius: 50%;
-  z-index: 10;
-}
-.preloader__second-inner-whell {
-  width: 50px;
-  height: 50px;
-  left: 5px;
-  top: 5px;
-  background-color: #FF7043;
-  border: 1px solid #DD2C00;
-  z-index: 2;
-}
-.preloader .preloader__wheel-wrapper:nth-child(1) {
-  top: 70px;
-}
-.preloader .preloader__wheel-wrapper:nth-child(1) .preloader__content {
-  animation: wheel_rotate 7s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(1) .preloader__wheel {
-  animation: _wheel_rotate 7s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(2) {
-  top: 140px;
-}
-.preloader .preloader__wheel-wrapper:nth-child(2) .preloader__content {
-  animation: wheel_rotate 3.5s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(2) .preloader__wheel {
-  animation: _wheel_rotate 3.5s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(3) {
-  top: 210px;
-}
-.preloader .preloader__wheel-wrapper:nth-child(3) .preloader__content {
-  animation: wheel_rotate 2.3333333333s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(3) .preloader__wheel {
-  animation: _wheel_rotate 2.3333333333s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(4) {
-  top: 280px;
-}
-.preloader .preloader__wheel-wrapper:nth-child(4) .preloader__content {
-  animation: wheel_rotate 1.75s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(4) .preloader__wheel {
-  animation: _wheel_rotate 1.75s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(5) {
-  top: 350px;
-}
-.preloader .preloader__wheel-wrapper:nth-child(5) .preloader__content {
-  animation: wheel_rotate 1.4s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(5) .preloader__wheel {
-  animation: _wheel_rotate 1.4s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(6) {
-  top: 420px;
-}
-.preloader .preloader__wheel-wrapper:nth-child(6) .preloader__content {
-  animation: wheel_rotate 1.1666666667s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(6) .preloader__wheel {
-  animation: _wheel_rotate 1.1666666667s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(7) {
-  top: 490px;
-}
-.preloader .preloader__wheel-wrapper:nth-child(7) .preloader__content {
-  animation: wheel_rotate 1s linear infinite;
-}
-.preloader .preloader__wheel-wrapper:nth-child(7) .preloader__wheel {
-  animation: _wheel_rotate 1s linear infinite;
-}
-@keyframes wheel_rotate {
-  0% {
-    transform: rotate(0);
+  .custom_loading{
+    background: #faebd770;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
   }
-  80% {
-    transform: rotate(335deg);
+  .sk-chase {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2100;
+    animation: sk-chase 2.5s infinite linear both;
   }
-  100% {
-    transform: rotate(360deg);
+
+  .sk-chase-dot {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0; 
+    animation: sk-chase-dot 2.0s infinite ease-in-out both; 
   }
-}
-@keyframes _wheel_rotate {
-  0% {
-    transform: rotate(360deg);
+
+  .sk-chase-dot:before {
+    content: '';
+    display: block;
+    width: 25%;
+    height: 25%;
+    background-color: #c32746;
+    border-radius: 100%;
+    animation: sk-chase-dot-before 2.0s infinite ease-in-out both; 
   }
-  80% {
-    transform: rotate(15deg);
+
+  .sk-chase-dot:nth-child(1) { animation-delay: -1.1s; }
+  .sk-chase-dot:nth-child(2) { animation-delay: -1.0s; }
+  .sk-chase-dot:nth-child(3) { animation-delay: -0.9s; }
+  .sk-chase-dot:nth-child(4) { animation-delay: -0.8s; }
+  .sk-chase-dot:nth-child(5) { animation-delay: -0.7s; }
+  .sk-chase-dot:nth-child(6) { animation-delay: -0.6s; }
+  .sk-chase-dot:nth-child(1):before { animation-delay: -1.1s; }
+  .sk-chase-dot:nth-child(2):before { animation-delay: -1.0s; }
+  .sk-chase-dot:nth-child(3):before { animation-delay: -0.9s; }
+  .sk-chase-dot:nth-child(4):before { animation-delay: -0.8s; }
+  .sk-chase-dot:nth-child(5):before { animation-delay: -0.7s; }
+  .sk-chase-dot:nth-child(6):before { animation-delay: -0.6s; }
+
+  @keyframes sk-chase {
+    100% { transform: rotate(360deg); } 
   }
-  100% {
-    transform: rotate(0deg);
+
+  @keyframes sk-chase-dot {
+    80%, 100% { transform: rotate(360deg); } 
   }
-}
+
+  @keyframes sk-chase-dot-before {
+    50% {
+      transform: scale(0.4); 
+    } 100%, 0% {
+      transform: scale(1.0); 
+    } 
+  }
+
 </style>

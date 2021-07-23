@@ -8,15 +8,9 @@ import Auth from "../components/auth/Login.vue";
 import TemplateDashboard from "../components/template/TemplateDashboard";
 import Home from "../components/home/Home.vue";
 import Users from "../components/users/Users.vue";
-// import SectionProducts from "../components/SectionProducts";
-// import ProductDetail from "../components/ProductDetail";
-// import CommunityDetail from "../components/CommunityDetail";
-// import ListEvents from "../components/ListEvents";
-// import IsiEventDetails from "../components/IsiEventDetails";
-// import TournamentDetail from '../components/TournamentDetail';
-// import RegisterTorunament from '../components/RegisterTorunament';
+import Consoles from "../components/consoles/Consoles.vue";
 
-// import PageNotFound from '../components/PageNotFound'
+import PageNotFound from '../components/partitials/PageNotFound'
 
 const guest = async (to, from, next) => {
     if (!localStorage.getItem("authToken")) {
@@ -60,48 +54,18 @@ const routes = [
                 beforeEnter: auth,
                 component: Users
             },
+            {
+                path: 'consoles',
+                name: 'Consoles',
+                beforeEnter: auth,
+                component: Consoles
+            },
         ]
-    }
-    // {
-    //     path: "/producto/:product_id",
-    //     name: "ProductDetail",
-    //     //beforeEnter: guest,
-    //     component: ProductDetail
-    // },
-    // {
-    //     path: "/comunidad/:product_id",
-    //     name: "CommunityDetail",
-    //     //beforeEnter: guest,
-    //     component: CommunityDetail
-    // },
-    // {
-    //     path: "/eventos",
-    //     name: "ListEvents",
-    //     //beforeEnter: guest,
-    //     component: ListEvents
-    // },
-    // {
-    //     path: "/evento/:event_slug",
-    //     name: "IsiEventDetails",
-    //     //beforeEnter: guest,
-    //     component: IsiEventDetails
-    // },
-    // {
-    //     path: "/evento/torneo/:tournamentId",
-    //     name: "TournamentDetail",
-    //     //beforeEnter: guest,
-    //     component: TournamentDetail
-    // },
-    // {
-    //     path: "/evento/torneo/:tournamentId/registro",
-    //     name: "RegisterTorunament",
-    //     //beforeEnter: guest,
-    //     component: RegisterTorunament
-    // },
-    // {
-    //     path: "*",
-    //     component: PageNotFound
-    // },
+    },
+    {
+        path: "*",
+        component: PageNotFound
+    },
 ];
 
 const router = new VueRouter({

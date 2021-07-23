@@ -1,12 +1,13 @@
 <template>
   <div>
       <router-view></router-view>
-      <!-- <Loading /> -->
+      <Loading />
   </div>
 </template>
 
 <script>
 import { mapActions } from "vuex";
+import Loading from './components/partitials/Loading'
 
 export default {
   name: 'App',
@@ -15,6 +16,9 @@ export default {
     if (localStorage.getItem("authToken")) {
         this.getUserData();
     }
+  },
+  components:{
+    Loading,
   },
   methods: {
     ...mapActions("auth", ["getUserData"]),
