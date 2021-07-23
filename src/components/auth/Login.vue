@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-12 d-flex justify-content-center">
+    <div class="col-lg-12 d-flex justify-content-center mt-5">
         <div class="col-lg-5">
             <div class="card shadow-lg p-3 mb-5 bg-body rounded">
                 <div class="card-body">
@@ -15,22 +15,16 @@
                             <input type="email" v-model="user.correo" required class="form-control rounded-3" id="correo">
                         </div>
                         <div class="mb-3">
-                            <label for="contraseña" class="form-label">Contraseña</label>
-                            <input type="password" v-model="user.contraseña" class="form-control rounded-3" id="contraseña" required>
+                            <label for="contrasenia" class="form-label">Contraseña</label>
+                            <input type="password" v-model="user.contrasenia" class="form-control rounded-3" id="contrasenia" required>
                         </div>
-                        <!-- <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div> -->
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-danger btn-lg">Iniciar Sesión</button>
                         </div>
                     </form>
                 </div>
-                </div>
             </div>
-            
-        
+        </div>
     </div>
 </template>
 <script>
@@ -41,7 +35,7 @@ export default {
         return {
             user:{
                 correo:"",
-                contraseña:""
+                contrasenia:""
             }
         }
     },
@@ -56,7 +50,7 @@ export default {
         login() {
             this.sendLoginRequest(this.user).then(() => {
                 if(JSON.stringify(this.$store.getters.errors).length < 3){
-                    //this.$router.push({ name: "TemplateDashboard" });
+                    this.$router.push({ name: "TemplateDashboard" });
                     //window.location.reload();
                 }else{
                     //var message = "";

@@ -1,26 +1,23 @@
 <template>
-  <div id="app" class="container">
-      <div class="row">
-          <Login v-if="!user"/>
-      </div>
+  <div>
+      <router-view></router-view>
       <!-- <Loading /> -->
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Login from './components/auth/Login';
+import { mapActions } from "vuex";
 
 export default {
   name: 'App',
-  components: {
-    Login,
-  },
   mounted() {
     this.$store.commit("setErrors", {});
+    if (localStorage.getItem("authToken")) {
+        this.getUserData();
+    }
   },
-  computed: {
-    ...mapGetters("auth", ["user"])
+  methods: {
+    ...mapActions("auth", ["getUserData"]),
   },
 }
 </script>

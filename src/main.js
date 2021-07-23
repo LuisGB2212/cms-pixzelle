@@ -5,11 +5,19 @@ import router from './router';
 import axios from "axios";
 import Swal from 'sweetalert2'
 
-
 Vue.config.productionTip = false
 
 require('bootstrap');
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+Vue.filter(
+  "dateFormat", function (value) {
+      if (!value)
+          return '';
+
+      return new Date(value).toLocaleString();
+  }
+);
 
 const Toast = Swal.mixin({
   toast: true,
@@ -32,11 +40,14 @@ axios.interceptors.response.use(
   error => {
       store.commit('loading', false);
       if (error.response.status === 422) {
+          Toast.fire({
+              icon:'error',
+              title: JSON.stringify(error.response.data.errors)
+          });
           store.commit("setErrors", error.response.data.errors);
       } else if (error.response.status === 401) {
           store.commit("auth/setUserData", null);
           localStorage.removeItem("authToken");
-          // router.push({ name: "AuthLayout" });
           window.location.reload();
       } else if (error.response.status === 404) {
           Toast.fire({

@@ -5,7 +5,9 @@ Vue.use(VueRouter);
 
 import Auth from "../components/auth/Login.vue";
 
-// import Home from "../components/Home.vue";
+import TemplateDashboard from "../components/template/TemplateDashboard";
+import Home from "../components/home/Home.vue";
+import Users from "../components/users/Users.vue";
 // import SectionProducts from "../components/SectionProducts";
 // import ProductDetail from "../components/ProductDetail";
 // import CommunityDetail from "../components/CommunityDetail";
@@ -18,22 +20,18 @@ import Auth from "../components/auth/Login.vue";
 
 const guest = async (to, from, next) => {
     if (!localStorage.getItem("authToken")) {
-        // window.location.reload();
         return next();
     } else {
-        return next("/dashboard");
+        return next("/admin/dashboard");
     }
 }; 
-// const auth = async (to, from, next) => {
-//     if (localStorage.getItem("authToken")) {
-//         return next();
-//     } else {
-//         //window.location.reload();
-//         return next({
-//             path: '/'
-//         });
-//     }
-// };
+const auth = async (to, from, next) => {
+    if (localStorage.getItem("authToken")) {
+        return next();
+    } else {
+        return next('/');
+    }
+};
 
 
 const routes = [
@@ -43,12 +41,27 @@ const routes = [
         beforeEnter: guest,
         component: Auth
     },
-    // {
-    //     path: "/sections/:type",
-    //     name: "SectionProducts",
-    //     //beforeEnter: guest,
-    //     component: SectionProducts
-    // },
+    {
+        path: '/admin',
+        name: 'TemplateDashboard',
+        component: TemplateDashboard,
+        beforeEnter: auth,
+        redirect: '/admin/dashboard',
+        children:[
+            {
+                path: 'dashboard',
+                name: 'Dashboard',
+                beforeEnter: auth,
+                component: Home
+            },
+            {
+                path: 'users',
+                name: 'Users',
+                beforeEnter: auth,
+                component: Users
+            },
+        ]
+    }
     // {
     //     path: "/producto/:product_id",
     //     name: "ProductDetail",

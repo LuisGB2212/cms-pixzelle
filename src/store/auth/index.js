@@ -13,7 +13,11 @@ export default {
 
     mutations: {
         setUserData(state, user) {
-            state.userData = user.user;
+            if(user == null){
+                state.userData = null;
+            }else{
+                state.userData = user.user.data;
+            }
         }
     },
 
@@ -41,32 +45,14 @@ export default {
             });
         },
 
-        // sendRegisterRequest({ commit }, data) {
-        // commit("setErrors", {}, { root: true });
-        // return axios
-        //     .post(process.env.VUE_APP_API_URL + "register", data)
-        //     .then(response => {
-        //     commit("setUserData", response.data.user);
-        //     localStorage.setItem("authToken", response.data.token);
-        //     });
-        // },
-
         sendLogoutRequest({ commit }) {
             axios.post("admin/logout").then(() => {
                 commit("setUserData", null);
                 localStorage.removeItem("authToken");
+                setTimeout(() => {
+                    window.location.reload();
+                },500);
             });
         },
-
-        // sendVerifyResendRequest() {
-        // return axios.get(process.env.VUE_APP_API_URL + "email/resend");
-        // },
-        // sendVerifyRequest({ dispatch }, hash) {
-        // return axios
-        //     .get(process.env.VUE_APP_API_URL + "email/verify/" + hash)
-        //     .then(() => {
-        //     dispatch("getUserData");
-        //     });
-        // }
     }
 };
